@@ -13,6 +13,7 @@ vim.pack.add {
   { src = 'https://github.com/nvim-tree/nvim-tree.lua' },
   { src = 'https://github.com/nvim-lualine/lualine.nvim' },
   { src = 'https://github.com/mason-org/mason.nvim' },
+  { src = 'https://github.com/lukas-reineke/indent-blankline.nvim' },
 }
 
 
@@ -253,9 +254,7 @@ require 'mason'.setup()
 
 
 
-
-
-
-
-
-
+--==========================================================
+-- indent-blankline.nvim
+--==========================================================
+require'ibl'.setup()
