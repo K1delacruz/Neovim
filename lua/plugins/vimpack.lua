@@ -40,14 +40,18 @@ vim.lsp.config('html', {
   -- ... rest ng config
 })
 
-vim.lsp.config('javascript', {
+vim.lsp.config('ts_ls', {
   cmd = { 'typescript-language-server', '--stdio' },
-  filetypes = { 'javascript', 'typescript', },
+  filetypes = {
+    'javascript',
+    'javascriptreact',
+    'typescript',
+    'typescriptreact',
+    'javascript.jsx',
+    'typescript.tsx'
+  },
   root_markers = { 'package.json', 'tsconfig.json', 'jsconfig.json', '.git' },
 })
-
-
-
 vim.keymap.set('n', '<leader>lf', vim.lsp.buf.format)
 
 
@@ -61,9 +65,18 @@ vim.keymap.set('n', '<leader>lf', vim.lsp.buf.format)
 -- telescoppe.nvim
 --==========================================================
 require "telescope".setup()
-vim.keymap.set('n', '<leader>f', '<cmd>Telescope<CR>', { silent = true })
-vim.keymap.set('n', '<leader>h', '<cmd>Telescope help_tags<CR>', { silent = true })
-
+-- See `:help telescope.builtin`
+local builtin = require 'telescope.builtin'
+vim.keymap.set('n', '<leader>sh', builtin.help_tags, { desc = '[S]earch [H]elp' })
+vim.keymap.set('n', '<leader>sk', builtin.keymaps, { desc = '[S]earch [K]eymaps' })
+vim.keymap.set('n', '<leader>sf', builtin.find_files, { desc = '[S]earch [F]iles' })
+vim.keymap.set('n', '<leader>ss', builtin.builtin, { desc = '[S]earch [S]elect Telescope' })
+vim.keymap.set('n', '<leader>sw', builtin.grep_string, { desc = '[S]earch current [W]ord' })
+vim.keymap.set('n', '<leader>sg', builtin.live_grep, { desc = '[S]earch by [G]rep' })
+vim.keymap.set('n', '<leader>sd', builtin.diagnostics, { desc = '[S]earch [D]iagnostics' })
+vim.keymap.set('n', '<leader>sr', builtin.resume, { desc = '[S]earch [R]esume' })
+vim.keymap.set('n', '<leader>s.', builtin.oldfiles, { desc = '[S]earch Recent Files ("." for repeat)' })
+vim.keymap.set('n', '<leader><leader>', builtin.buffers, { desc = '[ ] Find existing buffers' })
 
 
 
@@ -165,6 +178,9 @@ vim.g.loaded_netrwPlugin = 1
 
 
 
+
+
+
 vim.keymap.set('n', '<leader>e', '<cmd>NvimTreeToggle<CR>', { silent = true })
 
 
@@ -173,10 +189,73 @@ vim.keymap.set('n', '<leader>e', '<cmd>NvimTreeToggle<CR>', { silent = true })
 --==========================================================
 -- lualine
 --==========================================================
-require "lualine".setup()
+require('lualine').setup {
+  options = {
+    icons_enabled = true,
+    theme = 'auto',
+    component_separators = { left = '', right = '' },
+    section_separators = { left = '', right = '' },
+    disabled_filetypes = {
+      statusline = {},
+      winbar = {},
+    },
+    ignore_focus = {},
+    always_divide_middle = true,
+    always_show_tabline = true,
+    globalstatus = false,
+    refresh = {
+      statusline = 1000,
+      tabline = 1000,
+      winbar = 1000,
+      refresh_time = 16, -- ~60fps
+      events = {
+        'WinEnter',
+        'BufEnter',
+        'BufWritePost',
+        'SessionLoadPost',
+        'FileChangedShellPost',
+        'VimResized',
+        'Filetype',
+        'CursorMoved',
+        'CursorMovedI',
+        'ModeChanged',
+      },
+    }
+  },
+  sections = {
+    lualine_a = { 'mode' },
+    lualine_b = { 'branch', 'diff', 'diagnostics' },
+    lualine_c = { 'filename' },
+    lualine_x = { 'encoding', 'fileformat', 'filetype' },
+    lualine_y = { 'progress' },
+    lualine_z = { 'location' }
+  },
+  inactive_sections = {
+    lualine_a = {},
+    lualine_b = {},
+    lualine_c = { 'filename' },
+    lualine_x = { 'location' },
+    lualine_y = {},
+    lualine_z = {}
+  },
+  tabline = {},
+  winbar = {},
+  inactive_winbar = {},
+  extensions = {}
+}
 
 
 --==========================================================
 -- mason-nvim
 --==========================================================
 require 'mason'.setup()
+
+
+
+
+
+
+
+
+
+
