@@ -1,0 +1,31 @@
+vim.g.mapleader = " "
+vim.g.maplocalleader = "\\"
+
+
+vim.o.encoding = "utf-8"
+vim.o.mouse = "a"
+vim.o.number = true
+vim.o.relativenumber = true
+vim.o.swapfile = false
+vim.o.cursorline = true
+vim.o.wrap = false
+vim.o.winborder = "rounded"
+vim.o.signcolumn = "yes"
+vim.o.clipboard = "unnamedplus"
+vim.o.undofile = true
+vim.o.list = true
+vim.o.ignorecase = true
+vim.o.incsearch = true
+vim.o.shiftwidth = 2
+vim.o.smartcase = true
+vim.o.smartindent = true
+vim.o.tabstop = 2
+vim.o.softtabstop = 2
+vim.o.expandtab = true
+vim.o.smarttab = true
+vim.o.autoindent = true
+vim.o.completeopt = "menu,menuone,preview"
+vim.o.showtabline = 10
+vim.o.termguicolors = true
+vim.o.showmode = false
+vim.o.laststatus = 3
